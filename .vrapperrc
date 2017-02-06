@@ -1,0 +1,308 @@
+eclipseaction toggleABAPComment com.sap.adt.tools.abapsource.ui.toggleComment
+
+"Action definition ID of the edit -> text complete action
+eclipseaction HippieCompletion org.eclipse.ui.edit.text.hippieCompletion
+
+"Action definition id of the edit redo action.
+eclipseaction Redo org.eclipse.ui.edit.redo
+
+"Action definition id of code completion / content assist
+eclipseaction CondentAssist org.eclipse.ui.edit.text.contentAssist.proposals
+
+let mapleader=","
+
+set clipboard=unnamed
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set contentassistmode
+
+nnoremap : ;
+nnoremap ; :
+
+vnoremap : ;
+vnoremap ; :
+
+nnoremap <esc> :noh<CR><esc>
+vnoremap <esc> :noh<CR><esc>
+
+nnoremap <C-C> :noh<CR><C-C>
+vnoremap <C-C> :noh<CR><C-C>
+
+nnoremap <C-CR> O<Esc>j
+nnoremap <M-CR> o<Esc>k
+nnoremap <M-V> <C-V>
+nnoremap d- d$
+nnoremap v- v$
+nnoremap c- c$
+nnoremap y- y$
+
+"Bugfix {num}J
+nnoremap 2J JJ
+nnoremap 3J JJJ
+nnoremap 4J JJJJ
+nnoremap 5J JJJJJ
+
+nnoremap 2V Vj
+nnoremap 3V V2j
+nnoremap 4V V3j
+nnoremap 5V V4j
+
+""easier moving of code block,w,ws
+vnoremap < <gv 
+vnoremap > >gv 
+
+" center after next search item
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Upper/Lower case word
+nnoremap <leader>u gUiw
+nnoremap <leader>l guiw
+
+vnoremap <leader>u gU
+vnoremap <leader>l gu
+
+" Goto last change
+nnoremap <leader>g g,
+
+" Fast search and replace
+nnoremap <leader>s :%s///g<LEFT><LEFT><LEFT>
+vnoremap <leader>s :s///g<LEFT><LEFT><LEFT>
+
+" Swap visual selection and visual block selection
+nnoremap v <C-V>
+nnoremap <C-V> v
+
+" faster bookmarking
+nnoremap mm `
+
+nnoremap gc :toggleABAPComment<CR>
+vnoremap gc :toggleABAPComment<CR>
+nnoremap <leader>c :toggleABAPComment<CR>
+vnoremap <leader>c :toggleABAPComment<CR>
+nnoremap <leader>/ ^
+vnoremap <leader>/ ^
+nnoremap <leader>- $
+vnoremap <leader>- $
+
+nnoremap <leader>a `.
+nnoremap <leader>' `'
+nnoremap <leader>g g,
+
+nnoremap <leader>v gv
+
+"nnoremap <leader>t :
+"vnoremap <leader>t :
+
+nnoremap <CR> :
+vnoremap <CR> :
+
+" duplicate line
+nnoremap <leader>d mzyyp`z
+
+"fold
+nnoremap <leader>f za
+
+nnoremap <leader><space> i<space><esc>
+:subwordmappings
+
+nnoremap <leader>wN :wincmd J<CR>
+nnoremap <leader>wE :wincmd K<CR>
+nnoremap <leader>wH :wincmd H<CR>
+nnoremap <leader>wI :wincmd L<CR>
+
+nnoremap <leader>wT :wincmd J<CR>
+nnoremap <leader>wS :wincmd K<CR>
+nnoremap <leader>wR :wincmd H<CR>
+nnoremap <leader>wD :wincmd L<CR>
+
+nnoremap <leader>wn :wincmd j<CR>
+nnoremap <leader>wh :wincmd h<CR>
+nnoremap <leader>we :wincmd k<CR>
+nnoremap <leader>wi :wincmd l<CR>
+
+nnoremap <leader>wt :wincmd j<CR>
+nnoremap <leader>ws :wincmd k<CR>
+nnoremap <leader>wr :wincmd h<CR>
+nnoremap <leader>wd :wincmd l<CR>
+
+vnoremap <leader>wN :wincmd J<CR>
+vnoremap <leader>wE :wincmd K<CR>
+vnoremap <leader>wH :wincmd H<CR>
+vnoremap <leader>wI :wincmd L<CR>
+
+vnoremap <leader>wT :wincmd J<CR>
+vnoremap <leader>wS :wincmd K<CR>
+vnoremap <leader>wR :wincmd H<CR>
+vnoremap <leader>wD :wincmd L<CR>
+
+vnoremap <leader>wn :wincmd j<CR>
+vnoremap <leader>wh :wincmd h<CR>
+vnoremap <leader>we :wincmd k<CR>
+vnoremap <leader>wi :wincmd l<CR>
+
+vnoremap <leader>wt :wincmd j<CR>
+vnoremap <leader>ws :wincmd k<CR>
+vnoremap <leader>wr :wincmd h<CR>
+vnoremap <leader>wd :wincmd l<CR>
+
+"nnoremap <leader>tN :wincmd J<CR>
+"nnoremap <leader>tE :wincmd K<CR>
+"nnoremap <leader>tH :wincmd H<CR>
+"nnoremap <leader>tI :wincmd L<CR>
+"
+"nnoremap <leader>tT :wincmd J<CR>
+"nnoremap <leader>tS :wincmd K<CR>
+"nnoremap <leader>tR :wincmd H<CR>
+"nnoremap <leader>tD :wincmd L<CR>
+"
+"nnoremap <leader>tn :wincmd j<CR>
+"nnoremap <leader>th :wincmd h<CR>
+"nnoremap <leader>te :wincmd k<CR>
+"nnoremap <leader>ti :wincmd l<CR>
+"
+"nnoremap <leader>tt :wincmd j<CR>
+"nnoremap <leader>ts :wincmd k<CR>
+"nnoremap <leader>tr :wincmd h<CR>
+"nnoremap <leader>td :wincmd l<CR>
+
+" insert , at end of line or replaces the . at end of line with comma
+nnoremap <leader>, :s/\.$|([^,])\s?$|\s+,$/\1,/<CR> :s/\s+,$/,/<CR>
+vnoremap <leader>, :s/\.$|([^,])\s?$|\s+,$/\1,/<CR> :s/\s+,$/,/<CR>
+inoremap <leader>, <esc> :s/\.$|([^,])\s?$|\s+,$/\1,/<CR> :s/\s+,$/,/<CR>i
+
+nnoremap <leader>. :s/,$|([^.])\s?$|\s+\.$/\1\./<CR> :s/\s+\.$/\./<CR>
+vnoremap <leader>. :s/,$|([^.])\s?$|\s+\.$/\1\./<CR> :s/\s+\.$/\./<CR>
+inoremap <leader>. <esc> :s/,$|([^.])\s?$|\s+\.$/\1\./<CR> :s/\s+\.$/\./<CR>i
+
+nnoremap <leader>m :s/.$//<CR>
+vnoremap <leader>m :s/.$//<CR>
+inoremap <leader>m <esc> :s/.$//<CR>i
+
+nnoremap do :s/.$//<CR>
+
+" removes the first non-blank character in the line
+nnoremap dr :s/\S//<CR>
+" deletes until first non-blank character
+nnoremap d/ d^ 
+
+" paste from yank register
+nnoremap <leader>p "0p
+nnoremap <leader>P "0P
+
+vnoremap <leader>p "0p
+vnoremap <leader>P "0P
+
+nnoremap U  :Redo<CR>
+vnoremap U  :Redo<CR>
+
+nnoremap Y y$
+
+" Goto sections of class
+nnoremap <leader>np :?public.+section|protected.+section|private.+section<CR>
+
+nnoremap J A <ESC>J
+nnoremap <leader>na :s/(\<[^ :]+):?/\1:\r/<CR>0xV2><esc>
+nnoremap <leader>nr :s/(\<[^ :]+):?/\1:/<CR>
+nnoremap <leader>ns :s/:/:\r/g<CR>
+
+nnoremap <leader>nca ?class<CR>V/endclass<CR>
+nnoremap <leader>nma ?method<CR>V/endmethod<CR>
+nnoremap <leader>nci ?class<CR>jV/endclass<CR>k
+nnoremap <leader>nmi ?method<CR>jV/endmethod<CR>k
+nnoremap <leader>nmn ?[^end]method<CR><ESC>
+nnoremap <leader>nme /endmethod<CR><ESC><
+
+nnoremap <leader>nn :normal   
+vnoremap <leader>nn :normal   
+
+nnoremap <leader>nd ?data:<CR><ESC>
+nnoremap <leader>nf ?field-symbols:<CR><ESC>
+nnoremap <leader>nt ?types:?<CR><ESC>
+
+" delete string template
+nnoremap <leader>nx\ :s/\||\{\s|\s\}//g<CR>
+vnoremap <leader>nx\ :s/\||\{\s|\s\}//g<CR>
+nnoremap <leader>nx| :s/\||\{\s|\s\}//g<CR>
+vnoremap <leader>nx| :s/\||\{\s|\s\}//g<CR>
+nnoremap <leader>nx/ :s/\||\{\s|\s\}//g<CR>
+vnoremap <leader>nx/ :s/\||\{\s|\s\}//g<CR>
+
+" delete data( )
+nnoremap <leader>nxd :s/data\((\S+)\)/\1/gi<cr> :s/\<data:?\>//gi<cr>
+vnoremap <leader>nxd :s/data\((\S+)\)/\1/gi<cr> :s/\<data:?\>//gi<cr>
+
+" delete types
+nnoremap <leader>nxt :s/\<types:?\>//gi<cr>
+vnoremap <leader>nxt :s/\<types:?\>//gi<cr>
+
+" delete field-symbol( )
+nnoremap <leader>nxf :s/field-symbol\((<\S+>)\)/\1/gi<cr> :s/\<field-symbols:?\>//gi<cr>
+vnoremap <leader>nxf :s/field-symbol\((<\S+>)\)/\1/gi<cr> :s/\<field-symbols:?\>//gi<cr>
+
+" delete method
+nnoremap <leader>nxm :s/(class-)?methods?:?//gi<cr>
+vnoremap <leader>nxm :s/(class-)?methods?:?//gi<cr>
+
+" inserts data() around first word 
+nnoremap <leader>nid :s/\<(\S+)\>/data(\1)/<cr> 
+vnoremap <leader>nid :s/\<(\S+)\>/data(\1)/<cr> 
+
+" inserts field-symbol() around first word 
+nnoremap <leader>nif :s/(<\S*>)/FIELD-SYMBOL(\1)/<cr>
+vnoremap <leader>nif :s/(<\S*>)/FIELD-SYMBOL(\1)/<cr>
+"nnoremap <leader>nif :s/(assigning|ASSIGNING)\s+([^.]+)/\1 FIELD-SYMBOL(\2)/<cr>
+"vnoremap <leader>nif :s/(assigning|ASSIGNING)\s+([^.]+)/\1 FIELD-SYMBOL(\2)/<cr>
+
+" delete value( )
+nnoremap <leader>nxv :s/value\((.+)\)/\1/<CR>
+vnoremap <leader>nxv :s/value\((.+)\)/\1/<CR>
+
+" delete parameter
+nnoremap <leader>nxp :s/\<(importing)\>|\<(exporting)\>|\<(changing)\>|\<(returning)\>|\<(tables)\>|\<(default)\>.*|\<(optional)\>.*//gi<cr> 
+vnoremap <leader>nxp :s/\<(importing)\>|\<(exporting)\>|\<(changing)\>|\<(returning)\>|\<(tables)\>|\<(default)\>.*|\<(optional)\>.*//gi<cr> 
+
+" replace LIKE mit TYPE
+nnoremap <leader>nrt :s/\<LIKE|like\>/TYPE/<cr>
+vnoremap <leader>nrt :s/\<LIKE|like\>/TYPE/<cr>
+
+" Sneak
+nnoremap s <Plug>(sneak_s)
+nnoremap S <Plug>(sneak_S)
+
+nnoremap ; <Plug>(sneak-next)
+"nnoremap , <Plug>(sneak-prev)
+nnoremap : <Plug>(sneak-prev)
+
+vnoremap s <Plug>(sneak_s)
+vnoremap Z <Plug>(sneak_S)
+
+vnoremap ; <Plug>(sneak-next)
+vnoremap , <Plug>(sneak-prev)
+vnoremap : <Plug>(sneak-prev)
+
+nnoremap f <Plug>(sneak_f)
+nnoremap F <Plug>(sneak_F)
+nnoremap t <Plug>(sneak_t)
+nnoremap T <Plug>(sneak_T)
+
+vnoremap f <Plug>(sneak_f)
+vnoremap F <Plug>(sneak_F)
+vnoremap t <Plug>(sneak_t)
+vnoremap T <Plug>(sneak_T)
+
+omap z <Plug>(sneak_s)
+omap Z <Plug>(sneak_S)
+
+surround \ |\r|
+surround / |{<SPACE>\r<SPACE>}|
+surround r <SPACE>\r<SPACE>
+
+AddCycleGroup abap_true abap_false abap_bool
+AddCycleGroup ABAP_TRUE ABAP_FALSE ABAP_BOOL
+AddCycleGroup like type
+AddCycleGroup LIKE TYPE
+
+map <space> <leader>
