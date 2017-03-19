@@ -9,6 +9,20 @@ eclipseaction Redo org.eclipse.ui.edit.redo
 "Action definition id of code completion / content assist
 eclipseaction CondentAssist org.eclipse.ui.edit.text.contentAssist.proposals
 
+" Save...
+eclipseaction Save org.eclipse.ui.file.save
+
+" Pretty Print...
+eclipseaction PrettyPrint com.sap.adt.tools.abapsource.ui.prettyPrint
+
+" ABAP Syntax Chcek
+eclipseaction ABAPSyntaxCheck com.sap.adt.activation.ui.command.check
+
+" Ace
+eclipseaction Ace ace.jump.Command
+
+CycleProvider net.sourceforge.vrapper.plugin.cycle.provider.CycleProvider
+
 let mapleader=","
 
 set clipboard=unnamed
@@ -38,6 +52,8 @@ nnoremap v- v$
 nnoremap c- c$
 nnoremap y- y$
 
+nnoremap jj kA <Esc>J
+
 "Bugfix {num}J
 nnoremap 2J JJ
 nnoremap 3J JJJ
@@ -48,6 +64,9 @@ nnoremap 2V Vj
 nnoremap 3V V2j
 nnoremap 4V V3j
 nnoremap 5V V4j
+
+" Ace
+nnoremap <leader>t :Ace<CR>
 
 ""easier moving of code block,w,ws
 vnoremap < <gv 
@@ -76,7 +95,8 @@ nnoremap v <C-V>
 nnoremap <C-V> v
 
 " faster bookmarking
-nnoremap mm `
+nnoremap mm m 
+nnoremap m `
 
 nnoremap gc :toggleABAPComment<CR>
 vnoremap gc :toggleABAPComment<CR>
@@ -93,9 +113,6 @@ nnoremap <leader>g g,
 
 nnoremap <leader>v gv
 
-"nnoremap <leader>t :
-"vnoremap <leader>t :
-
 nnoremap <CR> :
 vnoremap <CR> :
 
@@ -106,7 +123,10 @@ nnoremap <leader>d mzyyp`z
 nnoremap <leader>f za
 
 nnoremap <leader><space> i<space><esc>
+vnoremap <leader><space> I<space><esc>gv
 :subwordmappings
+
+nnoremap <leader>w :Save<CR>
 
 nnoremap <leader>wN :wincmd J<CR>
 nnoremap <leader>wE :wincmd K<CR>
@@ -203,7 +223,7 @@ nnoremap Y y$
 " Goto sections of class
 nnoremap <leader>np :?public.+section|protected.+section|private.+section<CR>
 
-nnoremap J A <ESC>J
+nnoremap J A <ESC>J 
 nnoremap <leader>na :s/(\<[^ :]+):?/\1:\r/<CR>0xV2><esc>
 nnoremap <leader>nr :s/(\<[^ :]+):?/\1:/<CR>
 nnoremap <leader>ns :s/:/:\r/g<CR>
@@ -218,9 +238,9 @@ nnoremap <leader>nme /endmethod<CR><ESC><
 nnoremap <leader>nn :normal   
 vnoremap <leader>nn :normal   
 
-nnoremap <leader>nd ?data:<CR><ESC>
-nnoremap <leader>nf ?field-symbols:<CR><ESC>
-nnoremap <leader>nt ?types:?<CR><ESC>
+nnoremap <leader>nd ?data:<CR>}b<ESC>
+nnoremap <leader>nf ?field-symbols:<CR>}b<ESC>
+nnoremap <leader>nt ?types:?<CR>}b<ESC>
 
 " delete string template
 nnoremap <leader>nx\ :s/\||\{\s|\s\}//g<CR>
@@ -230,9 +250,13 @@ vnoremap <leader>nx| :s/\||\{\s|\s\}//g<CR>
 nnoremap <leader>nx/ :s/\||\{\s|\s\}//g<CR>
 vnoremap <leader>nx/ :s/\||\{\s|\s\}//g<CR>
 
+" delete data
+nnoremap <leader>nxd :s/\<data:?\>//gi<cr>
+vnoremap <leader>nxd :s/\<data:?\>//gi<cr>
+
 " delete data( )
-nnoremap <leader>nxd :s/data\((\S+)\)/\1/gi<cr> :s/\<data:?\>//gi<cr>
-vnoremap <leader>nxd :s/data\((\S+)\)/\1/gi<cr> :s/\<data:?\>//gi<cr>
+nnoremap <leader>nxdi :s/data\((\S+)\)/\1/gi<cr> 
+vnoremap <leader>nxdi :s/data\((\S+)\)/\1/gi<cr> 
 
 " delete types
 nnoremap <leader>nxt :s/\<types:?\>//gi<cr>
@@ -245,6 +269,10 @@ vnoremap <leader>nxf :s/field-symbol\((<\S+>)\)/\1/gi<cr> :s/\<field-symbols:?\>
 " delete method
 nnoremap <leader>nxm :s/(class-)?methods?:?//gi<cr>
 vnoremap <leader>nxm :s/(class-)?methods?:?//gi<cr>
+
+" delete lines
+nnoremap <leader>nxl kddjddk<Esc>
+vnoremap <leader>nxl <Esc>kddjddk<Esc>
 
 " inserts data() around first word 
 nnoremap <leader>nid :s/\<(\S+)\>/data(\1)/<cr> 
@@ -267,6 +295,9 @@ vnoremap <leader>nxp :s/\<(importing)\>|\<(exporting)\>|\<(changing)\>|\<(return
 " replace LIKE mit TYPE
 nnoremap <leader>nrt :s/\<LIKE|like\>/TYPE/<cr>
 vnoremap <leader>nrt :s/\<LIKE|like\>/TYPE/<cr>
+
+" replace paragraph of DATA/TYPES with DATA:/TYPES:
+nnoremap <leader>nrd {wea:<esc>V}k :s/\./,/<cr>}k :s/,/\./g<cr> gv :s/data[^\:]//g<cr> gv :s/types[^\:]//g<cr> gvoj>gv>gv :PrettyPrint<cr>
 
 " Sneak
 nnoremap s <Plug>(sneak_s)
