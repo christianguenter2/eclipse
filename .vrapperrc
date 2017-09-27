@@ -15,11 +15,15 @@ eclipseaction Save org.eclipse.ui.file.save
 " Pretty Print...
 eclipseaction PrettyPrint com.sap.adt.tools.abapsource.ui.prettyPrint
 
-" ABAP Syntax Chcek
+ ABAP Syntax Chcek
 eclipseaction ABAPSyntaxCheck com.sap.adt.activation.ui.command.check
 
 " Ace
 eclipseaction Ace ace.jump.Command
+
+" Emacs+
+eclipseaction openRectangle				com.mulgasoft.emacsplus.openRectangle
+eclipseaction whitespaceRectangle com.mulgasoft.emacsplus.whitespaceRectangle
 
 CycleProvider net.sourceforge.vrapper.plugin.cycle.provider.CycleProvider
 
@@ -51,6 +55,7 @@ nnoremap d- d$
 nnoremap v- v$
 nnoremap c- c$
 nnoremap y- y$
+nnoremap v> <C-V>>gv
 
 nnoremap jj kA <Esc>J
 
@@ -66,9 +71,9 @@ nnoremap 4V V3j
 nnoremap 5V V4j
 
 " Ace
-nnoremap <leader>t :Ace<CR>
+"nnoremap <leader>t :Ace<CR>
 
-""easier moving of code block,w,ws
+"easier moving of code block,w,ws
 vnoremap < <gv 
 vnoremap > >gv 
 
@@ -112,6 +117,8 @@ nnoremap <leader>' `'
 nnoremap <leader>g g,
 
 nnoremap <leader>v gv
+nnoremap <leader>V `[v`]
+nnoremap gV `[v`]
 
 nnoremap <CR> :
 vnoremap <CR> :
@@ -163,30 +170,29 @@ vnoremap <leader>wh :wincmd h<CR>
 vnoremap <leader>we :wincmd k<CR>
 vnoremap <leader>wi :wincmd l<CR>
 
-vnoremap <leader>wt :wincmd j<CR>
-vnoremap <leader>ws :wincmd k<CR>
-vnoremap <leader>wr :wincmd h<CR>
-vnoremap <leader>wd :wincmd l<CR>
+noremap <leader>wt :wincmd j<CR>
+noremap <leader>ws :wincmd k<CR>
+noremap <leader>wr :wincmd h<CR>
+noremap <leader>wd :wincmd l<CR>
+nnoremap <leader>tN :wincmd J<CR>
+nnoremap <leader>tE :wincmd K<CR>
+nnoremap <leader>tH :wincmd H<CR>
+nnoremap <leader>tI :wincmd L<CR>
 
-"nnoremap <leader>tN :wincmd J<CR>
-"nnoremap <leader>tE :wincmd K<CR>
-"nnoremap <leader>tH :wincmd H<CR>
-"nnoremap <leader>tI :wincmd L<CR>
-"
-"nnoremap <leader>tT :wincmd J<CR>
-"nnoremap <leader>tS :wincmd K<CR>
-"nnoremap <leader>tR :wincmd H<CR>
-"nnoremap <leader>tD :wincmd L<CR>
-"
-"nnoremap <leader>tn :wincmd j<CR>
-"nnoremap <leader>th :wincmd h<CR>
-"nnoremap <leader>te :wincmd k<CR>
-"nnoremap <leader>ti :wincmd l<CR>
-"
-"nnoremap <leader>tt :wincmd j<CR>
-"nnoremap <leader>ts :wincmd k<CR>
-"nnoremap <leader>tr :wincmd h<CR>
-"nnoremap <leader>td :wincmd l<CR>
+nnoremap <leader>tT :wincmd J<CR>
+nnoremap <leader>tS :wincmd K<CR>
+nnoremap <leader>tR :wincmd H<CR>
+nnoremap <leader>tD :wincmd L<CR>
+
+nnoremap <leader>tn :wincmd j<CR>
+nnoremap <leader>th :wincmd h<CR>
+nnoremap <leader>te :wincmd k<CR>
+nnoremap <leader>ti :wincmd l<CR>
+
+nnoremap <leader>tt :wincmd j<CR>
+nnoremap <leader>ts :wincmd k<CR>
+nnoremap <leader>tr :wincmd h<CR>
+nnoremap <leader>td :wincmd l<CR>
 
 " insert , at end of line or replaces the . at end of line with comma
 nnoremap <leader>, :s/\.$|([^,])\s?$|\s+,$/\1,/<CR> :s/\s+,$/,/<CR>
@@ -278,6 +284,14 @@ vnoremap <leader>nxl <Esc>kddjddk<Esc>
 nnoremap <leader>nid :s/\<(\S+)\>/data(\1)/<cr> 
 vnoremap <leader>nid :s/\<(\S+)\>/data(\1)/<cr> 
 
+" insert new line and indent
+nnoremap <leader>xn i<CR><ESC>>>
+
+" indents until white space of prev line
+inoremap <leader>t |<esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>kf "ljdw:s/\|/ /<cr>i"
+nnoremap <leader>"t i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>k/\s\S<cr>ljdw:noh<CR>"
+vnoremap <leader>"t I <esc>gvI <esc>gvI <esc>gvI <esc>gvI <esc>gvI <esc>gvI <esc>gvI <esc>gvI <esc>gvI <esc>gvI <esc>gvI <esc>gvI <esc>gvI <esc>gvI <esc>gv:normalI <esc>"gv15hoOkf "lj:whitespaceRect"angle<cr>"
+
 " inserts field-symbol() around first word 
 nnoremap <leader>nif :s/(<\S*>)/FIELD-SYMBOL(\1)/<cr>
 vnoremap <leader>nif :s/(<\S*>)/FIELD-SYMBOL(\1)/<cr>
@@ -287,6 +301,10 @@ vnoremap <leader>nif :s/(<\S*>)/FIELD-SYMBOL(\1)/<cr>
 " delete value( )
 nnoremap <leader>nxv :s/value\((.+)\)/\1/<CR>
 vnoremap <leader>nxv :s/value\((.+)\)/\1/<CR>
+
+" delete spaces
+nnoremap <leader>nxs :s/([^\s])\s{2,}/$1 /<CR>
+vnoremap <leader>nxs :s/([^\s])\s{2,}/$1 /<CR>
 
 " delete parameter
 nnoremap <leader>nxp :s/\<(importing)\>|\<(exporting)\>|\<(changing)\>|\<(returning)\>|\<(tables)\>|\<(default)\>.*|\<(optional)\>.*//gi<cr> 
@@ -298,6 +316,9 @@ vnoremap <leader>nrt :s/\<LIKE|like\>/TYPE/<cr>
 
 " replace paragraph of DATA/TYPES with DATA:/TYPES:
 nnoremap <leader>nrd {wea:<esc>V}k :s/\./,/<cr>}k :s/,/\./g<cr> gv :s/data[^\:]//g<cr> gv :s/types[^\:]//g<cr> gvoj>gv>gv :PrettyPrint<cr>
+
+" replace , and . in visual selection
+vnoremap <leader>nrp :s/\.//g<CR> gv :s/\,//g<CR>}kA.
 
 " Sneak
 nnoremap s <Plug>(sneak_s)
@@ -330,6 +351,15 @@ omap Z <Plug>(sneak_S)
 surround \ |\r|
 surround / |{<SPACE>\r<SPACE>}|
 surround r <SPACE>\r<SPACE>
+
+" delete surrounding space
+nnoremap dsr F<space>xf<space>x
+nnoremap ds<space> F<space>xf<space>x
+" delete surrounding blank lines
+nnoremap dsl {dd}ddk
+" insert blank lines surrounding
+nnoremap <leader>nisl o<Esc>k O<Esc>j
+vnoremap <leader>nisl <esc>`<O<esc>`>o<esc>gvk
 
 AddCycleGroup abap_true abap_false abap_bool
 AddCycleGroup ABAP_TRUE ABAP_FALSE ABAP_BOOL
