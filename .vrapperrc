@@ -74,8 +74,8 @@ nnoremap 5V V4j
 "nnoremap <leader>t :Ace<CR>
 
 "easier moving of code block,w,ws
-vnoremap < <gv 
-vnoremap > >gv 
+vnoremap < <gv
+vnoremap > >gv
 
 " center after next search item
 nnoremap n nzzzv
@@ -100,13 +100,22 @@ nnoremap v <C-V>
 nnoremap <C-V> v
 
 " faster bookmarking
-nnoremap mm m 
+nnoremap mm m
+vnoremap mm m
 nnoremap m `
+vnoremap m `
 
 nnoremap gc :toggleABAPComment<CR>
 vnoremap gc :toggleABAPComment<CR>
 nnoremap <leader>c :toggleABAPComment<CR>
 vnoremap <leader>c :toggleABAPComment<CR>
+
+nnoremap <leader>C :s/\s*(.*)/" $1/g<CR>
+vnoremap <leader>C :s/\s*(.*)/" $1/g<CR>
+
+nnoremap <leader>D :s/"(.*)/$1/g<CR>
+vnoremap <leader>D :s/"(.*)/$1/g<CR>
+
 nnoremap <leader>/ ^
 vnoremap <leader>/ ^
 nnoremap <leader>- $
@@ -135,6 +144,11 @@ vnoremap <leader><space> I<space><esc>gv
 
 nnoremap <leader>w :Save<CR>
 
+nnoremap <leader>w- :wincmd -<CR>
+nnoremap <leader>w+ :wincmd +<CR>
+nnoremap <leader>w< :wincmd <<CR>
+nnoremap <leader>w> :wincmd ><CR>
+
 nnoremap <leader>wN :wincmd J<CR>
 nnoremap <leader>wE :wincmd K<CR>
 nnoremap <leader>wH :wincmd H<CR>
@@ -155,6 +169,11 @@ nnoremap <leader>ws :wincmd k<CR>
 nnoremap <leader>wr :wincmd h<CR>
 nnoremap <leader>wd :wincmd l<CR>
 
+vnoremap <leader>w- :wincmd -<CR>
+vnoremap <leader>w+ :wincmd +<CR>
+vnoremap <leader>w< :wincmd <<CR>
+vnoremap <leader>w> :wincmd ><CR>
+
 vnoremap <leader>wN :wincmd J<CR>
 vnoremap <leader>wE :wincmd K<CR>
 vnoremap <leader>wH :wincmd H<CR>
@@ -170,29 +189,30 @@ vnoremap <leader>wh :wincmd h<CR>
 vnoremap <leader>we :wincmd k<CR>
 vnoremap <leader>wi :wincmd l<CR>
 
-noremap <leader>wt :wincmd j<CR>
-noremap <leader>ws :wincmd k<CR>
-noremap <leader>wr :wincmd h<CR>
-noremap <leader>wd :wincmd l<CR>
-nnoremap <leader>tN :wincmd J<CR>
-nnoremap <leader>tE :wincmd K<CR>
-nnoremap <leader>tH :wincmd H<CR>
-nnoremap <leader>tI :wincmd L<CR>
+vnoremap <leader>wt :wincmd j<CR>
+vnoremap <leader>ws :wincmd k<CR>
+vnoremap <leader>wr :wincmd h<CR>
+vnoremap <leader>wd :wincmd l<CR>
 
-nnoremap <leader>tT :wincmd J<CR>
-nnoremap <leader>tS :wincmd K<CR>
-nnoremap <leader>tR :wincmd H<CR>
-nnoremap <leader>tD :wincmd L<CR>
-
-nnoremap <leader>tn :wincmd j<CR>
-nnoremap <leader>th :wincmd h<CR>
-nnoremap <leader>te :wincmd k<CR>
-nnoremap <leader>ti :wincmd l<CR>
-
-nnoremap <leader>tt :wincmd j<CR>
-nnoremap <leader>ts :wincmd k<CR>
-nnoremap <leader>tr :wincmd h<CR>
-nnoremap <leader>td :wincmd l<CR>
+" nnoremap <leader>tN :wincmd J<CR>
+" nnoremap <leader>tE :wincmd K<CR>
+" nnoremap <leader>tH :wincmd H<CR>
+" nnoremap <leader>tI :wincmd L<CR>
+"
+" nnoremap <leader>tT :wincmd J<CR>
+" nnoremap <leader>tS :wincmd K<CR>
+" nnoremap <leader>tR :wincmd H<CR>
+" nnoremap <leader>tD :wincmd L<CR>
+"
+" nnoremap <leader>tn :wincmd j<CR>
+" nnoremap <leader>th :wincmd h<CR>
+" nnoremap <leader>te :wincmd k<CR>
+" nnoremap <leader>ti :wincmd l<CR>
+"
+" nnoremap <leader>tt :wincmd j<CR>
+" nnoremap <leader>ts :wincmd k<CR>
+" nnoremap <leader>tr :wincmd h<CR>
+" nnoremap <leader>td :wincmd l<CR>
 
 " insert , at end of line or replaces the . at end of line with comma
 nnoremap <leader>, :s/\.$|([^,])\s?$|\s+,$/\1,/<CR> :s/\s+,$/,/<CR>
@@ -208,11 +228,12 @@ vnoremap <leader>m :s/.$//<CR>
 inoremap <leader>m <esc> :s/.$//<CR>i
 
 nnoremap do :s/.$//<CR>
+vnoremap do :s/.$//<CR>
 
 " removes the first non-blank character in the line
 nnoremap dr :s/\S//<CR>
 " deletes until first non-blank character
-nnoremap d/ d^ 
+nnoremap d/ d^
 
 " paste from yank register
 nnoremap <leader>p "0p
@@ -220,6 +241,13 @@ nnoremap <leader>P "0P
 
 vnoremap <leader>p "0p
 vnoremap <leader>P "0P
+
+" yank append --> "ap to paste
+nnoremap <leader>y "ayy
+nnoremap <leader>Y "Ayy
+
+vnoremap <leader>y "ayy
+vnoremap <leader>Y "Ayy
 
 nnoremap U  :Redo<CR>
 vnoremap U  :Redo<CR>
@@ -229,20 +257,20 @@ nnoremap Y y$
 " Goto sections of class
 nnoremap <leader>np :?public.+section|protected.+section|private.+section<CR>
 
-nnoremap J A <ESC>J 
+nnoremap J A <ESC>J
 nnoremap <leader>na :s/(\<[^ :]+):?/\1:\r/<CR>0xV2><esc>
 nnoremap <leader>nr :s/(\<[^ :]+):?/\1:/<CR>
 nnoremap <leader>ns :s/:/:\r/g<CR>
 
 nnoremap <leader>nca ?class<CR>V/endclass<CR>
-nnoremap <leader>nma ?method<CR>V/endmethod<CR>
 nnoremap <leader>nci ?class<CR>jV/endclass<CR>k
+nnoremap <leader>nma ?method<CR>V/endmethod<CR>
 nnoremap <leader>nmi ?method<CR>jV/endmethod<CR>k
-nnoremap <leader>nmn ?[^end]method<CR><ESC>
+nnoremap <leader>nmn ?[^end]method<CR><ESC>2W
 nnoremap <leader>nme /endmethod<CR><ESC><
 
-nnoremap <leader>nn :normal   
-vnoremap <leader>nn :normal   
+nnoremap <leader>nn :normal
+vnoremap <leader>nn :normal
 
 nnoremap <leader>nd ?data:<CR>}b<ESC>
 nnoremap <leader>nf ?field-symbols:<CR>}b<ESC>
@@ -261,8 +289,8 @@ nnoremap <leader>nxd :s/\<data:?\>//gi<cr>
 vnoremap <leader>nxd :s/\<data:?\>//gi<cr>
 
 " delete data( )
-nnoremap <leader>nxdi :s/data\((\S+)\)/\1/gi<cr> 
-vnoremap <leader>nxdi :s/data\((\S+)\)/\1/gi<cr> 
+nnoremap <leader>nxdi :s/data\((\S+)\)/\1/gi<cr>
+vnoremap <leader>nxdi :s/data\((\S+)\)/\1/gi<cr>
 
 " delete types
 nnoremap <leader>nxt :s/\<types:?\>//gi<cr>
@@ -280,19 +308,19 @@ vnoremap <leader>nxm :s/(class-)?methods?:?//gi<cr>
 nnoremap <leader>nxl kddjddk<Esc>
 vnoremap <leader>nxl <Esc>kddjddk<Esc>
 
-" inserts data() around first word 
-nnoremap <leader>nid :s/\<(\S+)\>/data(\1)/<cr> 
-vnoremap <leader>nid :s/\<(\S+)\>/data(\1)/<cr> 
+" inserts data() around first word
+nnoremap <leader>nid :s/\<(\S+)\>/data(\1)/<cr>
+vnoremap <leader>nid :s/\<(\S+)\>/data(\1)/<cr>
 
 " insert new line and indent
 nnoremap <leader>xn i<CR><ESC>>>
 
 " indents until white space of prev line
-inoremap <leader>t |<esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>kf "ljdw:s/\|/ /<cr>i"
-nnoremap <leader>"t i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>k/\s\S<cr>ljdw:noh<CR>"
-vnoremap <leader>"t I <esc>gvI <esc>gvI <esc>gvI <esc>gvI <esc>gvI <esc>gvI <esc>gvI <esc>gvI <esc>gvI <esc>gvI <esc>gvI <esc>gvI <esc>gvI <esc>gvI <esc>gv:normalI <esc>"gv15hoOkf "lj:whitespaceRect"angle<cr>"
+" inoremap <leader>t <tab><tab><tab><tab><tab><tab><tab><tab><tab><tab><tab><esc>k^wjdwa
+" nnoremap <leader>t i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>i <esc>k/\s\S<cr>ljdw:noh<CR>"
+" vnoremap <leader>t mxI <tab><tab><tab><tab><tab><tab><tab><tab><tab><tab><tab><esc>`xgvo<esc>22hkwjmagv`aohx
 
-" inserts field-symbol() around first word 
+" inserts field-symbol() around first word
 nnoremap <leader>nif :s/(<\S*>)/FIELD-SYMBOL(\1)/<cr>
 vnoremap <leader>nif :s/(<\S*>)/FIELD-SYMBOL(\1)/<cr>
 "nnoremap <leader>nif :s/(assigning|ASSIGNING)\s+([^.]+)/\1 FIELD-SYMBOL(\2)/<cr>
@@ -307,8 +335,8 @@ nnoremap <leader>nxs :s/([^\s])\s{2,}/$1 /<CR>
 vnoremap <leader>nxs :s/([^\s])\s{2,}/$1 /<CR>
 
 " delete parameter
-nnoremap <leader>nxp :s/\<(importing)\>|\<(exporting)\>|\<(changing)\>|\<(returning)\>|\<(tables)\>|\<(default)\>.*|\<(optional)\>.*//gi<cr> 
-vnoremap <leader>nxp :s/\<(importing)\>|\<(exporting)\>|\<(changing)\>|\<(returning)\>|\<(tables)\>|\<(default)\>.*|\<(optional)\>.*//gi<cr> 
+nnoremap <leader>nxp :s/\<(importing)\>|\<(exporting)\>|\<(changing)\>|\<(returning)\>|\<(tables)\>|\<(default)\>.*|\<(optional)\>.*//gi<cr>
+vnoremap <leader>nxp :s/\<(importing)\>|\<(exporting)\>|\<(changing)\>|\<(returning)\>|\<(tables)\>|\<(default)\>.*|\<(optional)\>.*//gi<cr>
 
 " replace LIKE mit TYPE
 nnoremap <leader>nrt :s/\<LIKE|like\>/TYPE/<cr>
@@ -319,6 +347,10 @@ nnoremap <leader>nrd {wea:<esc>V}k :s/\./,/<cr>}k :s/,/\./g<cr> gv :s/data[^\:]/
 
 " replace , and . in visual selection
 vnoremap <leader>nrp :s/\.//g<CR> gv :s/\,//g<CR>}kA.
+
+" Increment/Decrement
+:nnoremap <A-a> <C-a>
+:nnoremap <A-x> <C-x>
 
 " Sneak
 nnoremap s <Plug>(sneak_s)
@@ -351,7 +383,11 @@ omap Z <Plug>(sneak_S)
 surround \ |\r|
 surround / |{<SPACE>\r<SPACE>}|
 surround r <SPACE>\r<SPACE>
+surround d ('\r')
 
+" delete surrounding string template
+nnoremap dsst ds{dsm|
+nnoremap ds/ ds{dsm|
 " delete surrounding space
 nnoremap dsr F<space>xf<space>x
 nnoremap ds<space> F<space>xf<space>x
@@ -361,12 +397,13 @@ nnoremap dsl {dd}ddk
 nnoremap <leader>nisl o<Esc>k O<Esc>j
 vnoremap <leader>nisl <esc>`<O<esc>`>o<esc>gvk
 
+" Cycle http://vrapper.sourceforge.net/documentation/?topic=optional_plugins
 AddCycleGroup abap_true abap_false abap_bool
 AddCycleGroup ABAP_TRUE ABAP_FALSE ABAP_BOOL
 AddCycleGroup like type
 AddCycleGroup LIKE TYPE
 
+nnoremap <leader>t <C-A>
+
 map <space> <leader>
-
-
 
